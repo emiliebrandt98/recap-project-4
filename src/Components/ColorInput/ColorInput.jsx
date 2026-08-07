@@ -4,9 +4,6 @@ import "./ColorInput.css";
 export default function ColorInput({ id, defaultValue }) {
   const [inputValue, setInputValue] = useState(defaultValue);
 
-  const textInputId = `${id}-text`;
-  const colorInputId = `${id}-color`;
-
   function handleInputValue(event) {
     setInputValue(event.target.value);
   }
@@ -15,18 +12,12 @@ export default function ColorInput({ id, defaultValue }) {
     <>
       <input
         type="text"
-        id={textInputId}
-        name={textInputId}
-        value={inputValue}
-        onChange={handleInputValue}
-      />
-      <input
-        type="color"
-        id={colorInputId}
+        id={id}
         name={id}
         value={inputValue}
         onChange={handleInputValue}
       />
+      <input type="color" value={inputValue} onChange={handleInputValue} />
     </>
   );
 }

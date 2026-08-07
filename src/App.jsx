@@ -5,9 +5,11 @@ import ColorForm from "./Components/ColorForm/ColorForm";
 import "./App.css";
 
 function App() {
+  // initialColor is going to change, so we use useState
   const [listColors, setListColors] = useState(initialColors);
 
-  function handleAddColor() {
+  // New Color are added to listColor(initialColor)
+  function handleAddColor(newColor) {
     setListColors([{ id: crypto.randomUUID(), ...newColor }, ...listColors]);
   }
 
