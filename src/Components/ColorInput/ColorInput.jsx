@@ -9,15 +9,21 @@ export default function ColorInput({ id, defaultValue }) {
   }
 
   return (
-    <>
+    <div className="color-input-container">
       <input
         type="text"
         id={id}
         name={id}
         value={inputValue}
         onChange={handleInputValue}
+        className="color-text-input"
       />
-      <input type="color" value={inputValue} onChange={handleInputValue} />
-    </>
+      <input
+        type="color"
+        value={inputValue}
+        onChange={handleInputValue}
+        className="color-picker-input"
+      />
+    </div>
   );
 }
