@@ -11,7 +11,7 @@ const defaultDataValue = {
 export default function ColorForm({
   defaultData = defaultDataValue,
   onSubmitColor,
-  buttontext,
+  buttonText,
 }) {
   const roleId = useId();
 
@@ -48,7 +48,7 @@ export default function ColorForm({
       </label>
 
       <button type="submit" className="submit-button">
-        {buttontext}
+        {buttonText}
       </button>
     </form>
   );

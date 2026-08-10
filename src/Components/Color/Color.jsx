@@ -37,7 +37,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       {isEditing ? (
         <>
           <ColorForm
-            buttontext="Update Color"
+            buttonText="Update Color"
             defaultData={color}
             onSubmitColor={(updatedData) => {
               onEditColor(id, updatedData);
