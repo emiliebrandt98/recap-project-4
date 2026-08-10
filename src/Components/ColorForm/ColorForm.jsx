@@ -21,8 +21,6 @@ export default function ColorForm({
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log("Formular-Daten beim Submit:", data);
-
     onSubmitColor(data);
   }
 
