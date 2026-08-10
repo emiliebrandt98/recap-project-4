@@ -2,13 +2,9 @@ import { useState } from "react";
 import "./Color.css";
 import { DeleteConfirmation } from "../DeleteConfirmation/DeleteConfirmation";
 
-export default function Color({ color, listColors, setListColors }) {
+export default function Color({ color, onDeleteColor }) {
   const { id, role, hex, contrastText } = color;
   const [isConfirming, setIsConfirming] = useState(false);
-
-  function handleDeleteButton(id) {
-    setListColors(listColors.filter((listColor) => listColor.id !== id));
-  }
 
   return (
     <article className="color-card" style={{ backgroundColor: hex }}>
@@ -17,10 +13,10 @@ export default function Color({ color, listColors, setListColors }) {
       <p style={{ color: contrastText }}> contrast: {contrastText}</p>
       {isConfirming ? (
         <DeleteConfirmation
-          onDeleteButton={() => {
-            handleDeleteButton(id);
+          onConfirmDelete={() => {
+            onDeleteColor(id);
           }}
-          onIsConfirming={() => {
+          onCancel={() => {
             setIsConfirming(false);
           }}
         />

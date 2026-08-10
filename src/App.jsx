@@ -13,6 +13,11 @@ function App() {
     setListColors([{ id: crypto.randomUUID(), ...newColor }, ...listColors]);
   }
 
+  // Color is deleted from listColor(initialColor)
+  function handleDeleteButton(id) {
+    setListColors(listColors.filter((listColor) => listColor.id !== id));
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
@@ -20,14 +25,11 @@ function App() {
       <ul className="color-list">
         {listColors.map((listColor) => (
           <li key={listColor.id}>
-            <Color
-              color={listColor}
-              listColors={listColors}
-              setListColors={setListColors}
-            />
+            <Color color={listColor} onDeleteColor={handleDeleteButton} />
           </li>
         ))}
       </ul>
+      {listColors.length === 0 && <p>No colors left. Add a new one!</p>}
     </>
   );
 }
