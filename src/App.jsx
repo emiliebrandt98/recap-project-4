@@ -5,8 +5,7 @@ import ColorForm from "./Components/ColorForm/ColorForm";
 import "./App.css";
 
 function App() {
-  // initialColor is going to change, so we use useState
-  // Theme is now saved to localStorage
+  // initialColor is going to change, Theme is now saved to localStorage
   const [listColors, setListColors] = useLocalStorageState("listColors", {
     defaultValue: initialColors,
   });
