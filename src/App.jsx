@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onSubmitButton={handleAddColor} />
+      <ColorForm onAddColor={handleAddColor} />
       <ul className="color-list">
         {listColors.map((listColor) => (
           <li key={listColor.id}>
