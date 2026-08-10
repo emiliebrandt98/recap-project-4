@@ -7,14 +7,3 @@ body {
   list-style-type: none;
   padding: 0;
 }
-
-.color-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 48px;
-  margin-top: 24px;
-  padding: 24px;
-  border: 2px solid #ff822e;
-  border-radius: 14px;
-}

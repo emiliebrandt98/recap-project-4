@@ -14,11 +14,15 @@ export default function ColorForm({
   buttonText,
 }) {
   const roleId = useId();
+  const hexId = useId();
+  const contrastTextID = useId();
 
   function handleSubmitButton(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    console.log("Formular-Daten beim Submit:", data);
+
     onSubmitColor(data);
   }
 
@@ -35,16 +39,20 @@ export default function ColorForm({
         />
       </label>
 
-      <label htmlFor="hex" className="form-label">
+      <label htmlFor={hexId} className="form-label">
         Hexa
         <br />
-        <ColorInput id="hex" defaultValue={defaultData.hex} />
+        <ColorInput id={hexId} name="hex" defaultValue={defaultData.hex} />
       </label>
 
-      <label htmlFor="contrastText" className="form-label">
+      <label htmlFor={contrastTextID} className="form-label">
         Contrast Text
         <br />
-        <ColorInput id="contrastText" defaultValue={defaultData.contrastText} />
+        <ColorInput
+          id={contrastTextID}
+          name="contrastText"
+          defaultValue={defaultData.contrastText}
+        />
       </label>
 
       <button type="submit" className="submit-button">
