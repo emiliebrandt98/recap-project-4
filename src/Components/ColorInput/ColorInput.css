@@ -1,0 +1,19 @@
+.color-input-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.color-text-input {
+  border-radius: 8px;
+  padding: 8px 12px;
+  height: 2.5rem;
+  width: 100%;
+}
+
+.color-picker-input {
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  height: 2.5rem;
+}
