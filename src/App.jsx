@@ -14,18 +14,31 @@ function App() {
   }
 
   // Color is deleted from listColor(initialColor)
-  function handleDeleteButton(id) {
+  function handleDeleteColor(id) {
     setListColors(listColors.filter((listColor) => listColor.id !== id));
+  }
+
+  // Editing ColorCard and replace in listColor(initialColor)
+  function handleEditColor(id, updatedData) {
+    setListColors(
+      listColors.map((listColor) =>
+        listColor.id === id ? { ...listColor, ...updatedData } : listColor,
+      ),
+    );
   }
 
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onAddColor={handleAddColor} />
+      <ColorForm onSubmitColor={handleAddColor} />
       <ul className="color-list">
         {listColors.map((listColor) => (
           <li key={listColor.id}>
-            <Color color={listColor} onDeleteColor={handleDeleteButton} />
+            <Color
+              color={listColor}
+              onDeleteColor={handleDeleteColor}
+              onEditColor={handleEditColor}
+            />
           </li>
         ))}
       </ul>

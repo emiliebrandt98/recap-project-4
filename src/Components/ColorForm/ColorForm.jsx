@@ -10,7 +10,7 @@ const defaultDataValue = {
 
 export default function ColorForm({
   defaultData = defaultDataValue,
-  onAddColor,
+  onSubmitColor,
 }) {
   const roleId = useId();
 
@@ -18,7 +18,7 @@ export default function ColorForm({
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onAddColor(data);
+    onSubmitColor(data);
   }
 
   return (
