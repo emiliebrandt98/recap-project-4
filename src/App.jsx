@@ -20,7 +20,11 @@ function App() {
       <ul className="color-list">
         {listColors.map((listColor) => (
           <li key={listColor.id}>
-            <Color color={listColor} />
+            <Color
+              color={listColor}
+              listColors={listColors}
+              setListColors={setListColors}
+            />
           </li>
         ))}
       </ul>
