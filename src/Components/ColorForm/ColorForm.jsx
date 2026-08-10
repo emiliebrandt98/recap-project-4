@@ -10,7 +10,7 @@ const defaultDataValue = {
 
 export default function ColorForm({
   defaultData = defaultDataValue,
-  onSubmitButton,
+  onAddColor,
 }) {
   const roleId = useId();
 
@@ -18,7 +18,7 @@ export default function ColorForm({
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onSubmitButton(data);
+    onAddColor(data);
   }
 
   return (
@@ -31,16 +31,16 @@ export default function ColorForm({
           name="role"
           defaultValue={defaultData.role}
           className="role-input"
-        ></input>
+        />
       </label>
 
-      <label htmlFor="hex-code" className="form-label">
+      <label htmlFor="hex" className="form-label">
         Hexa
         <br />
         <ColorInput id="hex" defaultValue={defaultData.hex} />
       </label>
 
-      <label htmlFor="contrast-text" className="form-label">
+      <label htmlFor="contrastText" className="form-label">
         Contrast Text
         <br />
         <ColorInput id="contrastText" defaultValue={defaultData.contrastText} />
