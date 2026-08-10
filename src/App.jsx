@@ -1,12 +1,14 @@
+import useLocalStorageState from "use-local-storage-state";
 import { initialColors } from "./lib/colors";
-import { useState } from "react";
 import Color from "./Components/Color/Color";
 import ColorForm from "./Components/ColorForm/ColorForm";
 import "./App.css";
 
 function App() {
-  // initialColor is going to change, so we use useState
-  const [listColors, setListColors] = useState(initialColors);
+  // initialColor is going to change, Theme is now saved to localStorage
+  const [listColors, setListColors] = useLocalStorageState("listColors", {
+    defaultValue: initialColors,
+  });
 
   // New Color are added to listColor(initialColor)
   function handleAddColor(newColor) {
