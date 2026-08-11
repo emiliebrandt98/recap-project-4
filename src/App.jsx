@@ -26,18 +26,30 @@ function App() {
   // –––––––––––––––––––––– Array-Methodes –––––––––––––––––––––––––
 
   // Find the active Theme
-  const activeTheme = themes.find((theme) => theme.id === activeThemeId);
+  const activeTheme =
+    themes.find((theme) => theme.id === activeThemeId) || themes[0];
 
   // Filter to show colors of the active Theme
-  const activeColors = initialColors.filter((color) =>
+  const activeColors = listColors.filter((color) =>
     activeTheme.colors.includes(color.id),
   );
 
   // –––––––––––––––––––––– handle-functions –––––––––––––––––––––––––
 
+  /* Color */
   // New Color are added to listColor(initialColor)
   function handleAddColor(newColor) {
-    setListColors([{ id: crypto.randomUUID(), ...newColor }, ...listColors]);
+    const createdColor = { id: crypto.randomUUID(), ...newColor };
+
+    setListColors([createdColor, ...listColors]);
+
+    setThemes(
+      themes.map((theme) =>
+        theme.id === activeThemeId
+          ? { ...theme, colors: [...theme.colors, createdColor.id] }
+          : theme,
+      ),
+    );
   }
 
   // Color is deleted from listColor(initialColor)
@@ -54,11 +66,30 @@ function App() {
     );
   }
 
+  /* Theme */
   // New Themes are added to themes
   function handleAddTheme(name) {
     const newTheme = { id: crypto.randomUUID(), name, colors: [] };
     setThemes([...themes, newTheme]);
     setActiveThemeId(newTheme.id);
+  }
+
+  // Delete Theme
+  function handleDeleteTheme(id) {
+    const updatedThemes = themes.filter((theme) => theme.id !== id);
+    setThemes(updatedThemes);
+    if (updatedThemes.length > 0) {
+      setActiveThemeId(initialThemes[0].id);
+    }
+  }
+
+  // Edit Theme
+  function handleEditTheme(id, updatedTheme) {
+    setThemes(
+      themes.map((theme) =>
+        theme.id === id ? { ...theme, ...updatedTheme } : theme,
+      ),
+    );
   }
 
   return (
@@ -67,22 +98,24 @@ function App() {
       <ThemeSelector
         themes={themes}
         onAddTheme={handleAddTheme}
-        value={activeThemeId}
+        onDeleteTheme={handleDeleteTheme}
+        onEditTheme={handleEditTheme}
+        value={activeThemeId || ""}
         onChange={(event) => setActiveThemeId(event.target.value)}
       />
       <ColorForm onSubmitColor={handleAddColor} buttonText="Add new Color" />
       <ul className="color-list">
-        {listColors.map((listColor) => (
-          <li key={listColor.id}>
+        {activeColors.map((color) => (
+          <li key={color.id}>
             <Color
-              color={listColor}
+              color={color}
               onDeleteColor={handleDeleteColor}
               onEditColor={handleEditColor}
             />
           </li>
         ))}
       </ul>
-      {listColors.length === 0 && <p>No colors left. Add a new one!</p>}
+      {activeColors.length === 0 && <p>No colors left. Add a new one!</p>}
     </>
   );
 }

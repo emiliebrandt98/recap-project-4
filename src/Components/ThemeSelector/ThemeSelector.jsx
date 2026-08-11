@@ -1,16 +1,38 @@
 import { useId, useState } from "react";
+import { initialThemes } from "../../lib/themes";
 import "./ThemeSelector.css";
+import { DeleteConfirmation } from "../DeleteConfirmation/DeleteConfirmation";
 
-export function ThemeSelector({ value, onChange, themes, onAddTheme }) {
+export function ThemeSelector({
+  value,
+  onChange,
+  themes,
+  onAddTheme,
+  onDeleteTheme,
+  onEditTheme,
+}) {
   const themeSelectorId = useId();
-  const [newThemeName, setNewThemeName] = useState("");
+  const [themeName, setThemeName] = useState("");
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
+  const [isEditingTheme, setIsEditingTheme] = useState(false);
 
-  function handleInputValue(event) {
-    setNewThemeName(event.target.value);
+  const currentTheme = themes.find((theme) => theme.id === value);
+
+  function handleAddSubmit() {
+    if (themeName.trim() === "") return;
+    onAddTheme(themeName);
+    setThemeName("");
+  }
+
+  function handleEditSubmit() {
+    if (themeName.trim() === "") return;
+    onEditTheme(value, { name: themeName });
+    setIsEditingTheme(false);
+    setThemeName("");
   }
 
   return (
-    <form>
+    <form onSubmit={(event) => event.preventDefault()}>
       <label htmlFor={themeSelectorId}>
         Themes:
         <select id={themeSelectorId} onChange={onChange} value={value}>
@@ -21,19 +43,75 @@ export function ThemeSelector({ value, onChange, themes, onAddTheme }) {
           ))}
         </select>
       </label>
+
+      {/* Theme hinzufügen */}
       <label>
-        <input type="text" value={newThemeName} onChange={handleInputValue} />
+        <input
+          type="text"
+          value={themeName}
+          onChange={(event) => setThemeName(event.target.value)}
+          placeholder="Theme Name"
+        />
       </label>
-      <button
-        type="button"
-        onClick={() => {
-          if (newThemeName.trim() === "") return;
-          onAddTheme(newThemeName);
-          setNewThemeName("");
-        }}
-      >
-        Add Theme
-      </button>
+
+      {/* Theme edit */}
+      {isEditingTheme ? (
+        <>
+          <button type="button" onClick={handleEditSubmit}>
+            Save
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setIsEditingTheme(false);
+              setThemeName("");
+            }}
+          >
+            Cancel
+          </button>
+        </>
+      ) : (
+        <button type="button" onClick={handleAddSubmit}>
+          Add Theme
+        </button>
+      )}
+
+      {!isEditingTheme && (
+        <button
+          type="button"
+          onClick={() => {
+            setThemeName(currentTheme?.name || "");
+            setIsEditingTheme(true);
+          }}
+          disabled={value === initialThemes[0].id}
+        >
+          {" "}
+          Edit Button
+        </button>
+      )}
+
+      {/* Theme löschen */}
+      {isConfirmingDelete ? (
+        <DeleteConfirmation
+          onConfirmDelete={() => {
+            onDeleteTheme(value);
+            setIsConfirmingDelete(false);
+          }}
+          onCancel={() => {
+            setIsConfirmingDelete(false);
+          }}
+        />
+      ) : (
+        <button
+          type="button"
+          onClick={() => {
+            setIsConfirmingDelete(true);
+          }}
+          disabled={value === initialThemes[0].id}
+        >
+          Delete Theme
+        </button>
+      )}
     </form>
   );
 }
