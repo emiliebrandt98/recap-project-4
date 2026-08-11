@@ -54,10 +54,22 @@ function App() {
     );
   }
 
+  // New Themes are added to themes
+  function handleAddTheme(name) {
+    const newTheme = { id: crypto.randomUUID(), name, colors: [] };
+    setThemes([...themes, newTheme]);
+    setActiveThemeId(newTheme.id);
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
-      <ThemeSelector />
+      <ThemeSelector
+        themes={themes}
+        onAddTheme={handleAddTheme}
+        value={activeThemeId}
+        onChange={(event) => setActiveThemeId(event.target.value)}
+      />
       <ColorForm onSubmitColor={handleAddColor} buttonText="Add new Color" />
       <ul className="color-list">
         {listColors.map((listColor) => (
