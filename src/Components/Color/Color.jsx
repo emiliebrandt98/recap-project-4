@@ -3,11 +3,13 @@ import "./Color.css";
 import { DeleteConfirmation } from "../DeleteConfirmation/DeleteConfirmation";
 import { CopyToClipboard } from "../CopyToClipboard/CopyToClipboard";
 import ColorForm from "../ColorForm/ColorForm";
+import { useContrastScore } from "../ContrastCheckerApi/ContrastCheckerApi";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const { id, role, hex, contrastText } = color;
   const [isConfirming, setIsConfirming] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const score = useContrastScore(hex, contrastText);
 
   return (
     <article className="color-card" style={{ backgroundColor: hex }}>
@@ -15,6 +17,14 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       <CopyToClipboard color={color} />
       <p style={{ color: contrastText }}>{role}</p>
       <p style={{ color: contrastText }}> contrast: {contrastText}</p>
+
+      {score && (
+        <div className="overall-score">
+          <p className={` overall-score--${score.overall}`}>
+            Overall Contrast Score: {score.overall}
+          </p>
+        </div>
+      )}
 
       {isConfirming ? (
         <DeleteConfirmation
