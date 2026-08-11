@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Color.css";
 import { DeleteConfirmation } from "../DeleteConfirmation/DeleteConfirmation";
-import { CopyToClipBoard } from "../CopyToClipboard/CopyToClipboard";
+import { CopyToClipboard } from "../CopyToClipboard/CopyToClipboard";
 import ColorForm from "../ColorForm/ColorForm";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
@@ -11,10 +11,8 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
 
   return (
     <article className="color-card" style={{ backgroundColor: hex }}>
-      <h2 className="color-card-headline">
-        {hex}
-        <CopyToClipBoard color={color} />
-      </h2>
+      <h2 className="color-card-headline">{hex}</h2>
+      <CopyToClipboard color={color} />
       <p style={{ color: contrastText }}>{role}</p>
       <p style={{ color: contrastText }}> contrast: {contrastText}</p>
 

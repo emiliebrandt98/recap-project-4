@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./CopyToClipboard.css";
 
-export function CopyToClipBoard({ color }) {
+export function CopyToClipboard({ color }) {
   const [copyConfirmation, setCopyConfirmation] = useState(false);
 
   useEffect(() => {
@@ -10,10 +10,6 @@ export function CopyToClipBoard({ color }) {
     const timeoutId = setTimeout(() => {
       setCopyConfirmation(false);
     }, 3000);
-
-    if (copyConfirmation === true) {
-      timeoutId;
-    }
 
     return () => {
       clearTimeout(timeoutId);
@@ -27,8 +23,6 @@ export function CopyToClipBoard({ color }) {
     } catch (error) {
       console.error(error.message);
     }
-
-    setCopyConfirmation(true);
   }
 
   return (
