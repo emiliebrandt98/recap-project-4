@@ -15,7 +15,6 @@ export function ThemeSelector({
   const [themeName, setThemeName] = useState("");
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const [isEditingTheme, setIsEditingTheme] = useState(false);
-
   const currentTheme = themes.find((theme) => theme.id === value);
 
   function handleAddSubmit() {
@@ -34,7 +33,7 @@ export function ThemeSelector({
   return (
     <form onSubmit={(event) => event.preventDefault()}>
       <label htmlFor={themeSelectorId}>
-        Themes:
+        Theme Name:
         <select id={themeSelectorId} onChange={onChange} value={value}>
           {themes.map((theme) => (
             <option key={theme.id} value={theme.id}>
