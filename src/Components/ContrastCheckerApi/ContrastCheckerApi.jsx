@@ -8,7 +8,7 @@ export function useContrastScore(hex, contrastText) {
     async function fetchScore() {
       try {
         const response = await fetch(
-          "https://www.aremycolorsaccessible.com/api/are-they",
+          "https://aremycolorsaccessible.com/api/are-they",
           {
             mode: "cors",
             method: "POST",

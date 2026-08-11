@@ -18,7 +18,13 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       <p style={{ color: contrastText }}>{role}</p>
       <p style={{ color: contrastText }}> contrast: {contrastText}</p>
 
-      {score && <p>Overall Contrast Score; {score.Overall}</p>}
+      {score && (
+        <div className="overall-score">
+          <p className={` overall-score--${score.overall}`}>
+            Overall Contrast Score: {score.overall}
+          </p>
+        </div>
+      )}
 
       {isConfirming ? (
         <DeleteConfirmation
