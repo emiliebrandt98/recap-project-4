@@ -5,6 +5,7 @@ import ColorForm from "./Components/ColorForm/ColorForm";
 import "./App.css";
 import { initialThemes } from "./lib/themes";
 import { useState } from "react";
+import { ThemeSelector } from "./Components/ThemeSelector/ThemeSelector";
 
 function App() {
   // –––––––––––––––––––––– UseStates –––––––––––––––––––––––––
@@ -22,9 +23,15 @@ function App() {
   // Current Theme
   const [activeThemeId, setActiveThemeId] = useState(initialThemes[0].id);
 
-  // –––––––––––––––––––––– Array-Methodes to find active Theme –––––––––––––––––––––––––
+  // –––––––––––––––––––––– Array-Methodes –––––––––––––––––––––––––
 
+  // Find the active Theme
   const activeTheme = themes.find((theme) => theme.id === activeThemeId);
+
+  // Filter to show colors of the active Theme
+  const activeColors = initialColors.filter((color) =>
+    activeTheme.colors.includes(color.id),
+  );
 
   // –––––––––––––––––––––– handle-functions –––––––––––––––––––––––––
 
@@ -50,6 +57,7 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
+      <ThemeSelector />
       <ColorForm onSubmitColor={handleAddColor} buttonText="Add new Color" />
       <ul className="color-list">
         {listColors.map((listColor) => (
