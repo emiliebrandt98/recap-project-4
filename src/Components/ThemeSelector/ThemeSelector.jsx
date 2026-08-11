@@ -19,7 +19,7 @@ export function ThemeSelector({
 
   function handleAddSubmit() {
     if (themeName.trim() === "") return;
-    onAddTheme(themeName);
+    onAddTheme(themeName.trim());
     setThemeName("");
   }
 
@@ -84,7 +84,6 @@ export function ThemeSelector({
           }}
           disabled={value === initialThemes[0].id}
         >
-          {" "}
           Edit Button
         </button>
       )}

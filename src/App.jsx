@@ -21,7 +21,10 @@ function App() {
   });
 
   // Current Theme
-  const [activeThemeId, setActiveThemeId] = useState(initialThemes[0].id);
+  const [activeThemeId, setActiveThemeId] = useLocalStorageState(
+    "activeThemeId",
+    { defaultValue: initialThemes[0].id },
+  );
 
   // –––––––––––––––––––––– Array-Methodes –––––––––––––––––––––––––
 
@@ -55,6 +58,12 @@ function App() {
   // Color is deleted from listColor(initialColor)
   function handleDeleteColor(id) {
     setListColors(listColors.filter((listColor) => listColor.id !== id));
+    setThemes(
+      themes.map((theme) => ({
+        ...theme,
+        colors: theme.colors.filter((colorId) => colorId !== id),
+      })),
+    );
   }
 
   // Editing ColorCard and replace in listColor(initialColor)
@@ -77,10 +86,9 @@ function App() {
   // Delete Theme
   function handleDeleteTheme(id) {
     const updatedThemes = themes.filter((theme) => theme.id !== id);
+
     setThemes(updatedThemes);
-    if (updatedThemes.length > 0) {
-      setActiveThemeId(initialThemes[0].id);
-    }
+    setActiveThemeId(initialThemes[0].id);
   }
 
   // Edit Theme
