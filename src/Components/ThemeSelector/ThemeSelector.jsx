@@ -16,6 +16,7 @@ export function ThemeSelector({
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const [isEditingTheme, setIsEditingTheme] = useState(false);
   const currentTheme = themes.find((theme) => theme.id === value);
+  const isDefaultTheme = value === initialThemes[0].id;
 
   useEffect(() => {
     setIsEditingTheme(false);
@@ -51,6 +52,7 @@ export function ThemeSelector({
 
       {/* Theme hinzufügen */}
       <label>
+        New Theme Name:
         <input
           type="text"
           value={themeName}
@@ -88,7 +90,7 @@ export function ThemeSelector({
             setThemeName(currentTheme?.name || "");
             setIsEditingTheme(true);
           }}
-          disabled={value === initialThemes[0].id}
+          disabled={isDefaultTheme}
         >
           Edit Button
         </button>
@@ -111,7 +113,7 @@ export function ThemeSelector({
           onClick={() => {
             setIsConfirmingDelete(true);
           }}
-          disabled={value === initialThemes[0].id}
+          disabled={isDefaultTheme}
         >
           Delete Theme
         </button>
