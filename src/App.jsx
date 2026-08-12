@@ -4,7 +4,6 @@ import Color from "./Components/Color/Color";
 import ColorForm from "./Components/ColorForm/ColorForm";
 import "./App.css";
 import { initialThemes } from "./lib/themes";
-import { useState } from "react";
 import { ThemeSelector } from "./Components/ThemeSelector/ThemeSelector";
 
 function App() {
@@ -85,9 +84,17 @@ function App() {
 
   // Delete Theme
   function handleDeleteTheme(id) {
-    const updatedThemes = themes.filter((theme) => theme.id !== id);
+    const themeToDelete = themes.find((theme) => theme.id === id);
 
+    const updatedThemes = themes.filter((theme) => theme.id !== id);
     setThemes(updatedThemes);
+
+    // Filter listColors down to ids still referenced by updatedThemes
+    const updatedColors = listColors.filter(
+      (color) => !themeToDelete.colors.includes(color.id),
+    );
+
+    setListColors(updatedColors);
     setActiveThemeId(initialThemes[0].id);
   }
 

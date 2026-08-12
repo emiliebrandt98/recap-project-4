@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useId, useState, useEffect } from "react";
 import { initialThemes } from "../../lib/themes";
 import "./ThemeSelector.css";
 import { DeleteConfirmation } from "../DeleteConfirmation/DeleteConfirmation";
@@ -16,6 +16,12 @@ export function ThemeSelector({
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const [isEditingTheme, setIsEditingTheme] = useState(false);
   const currentTheme = themes.find((theme) => theme.id === value);
+
+  useEffect(() => {
+    setIsEditingTheme(false);
+    setIsConfirmingDelete(false);
+    setThemeName("");
+  }, [value]);
 
   function handleAddSubmit() {
     if (themeName.trim() === "") return;
