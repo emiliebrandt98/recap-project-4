@@ -1,19 +1,23 @@
 .color-input-container {
   display: flex;
-  gap: 12px;
+  gap: var(--gap-s);
   align-items: center;
 }
 
 .color-text-input {
-  border-radius: 8px;
+  background-color: var(--background-color);
+  border: 1.5px solid var(--text-dark);
+  border-radius: var(--border-radius-s);
   padding: 8px 12px;
-  height: 2.5rem;
+  height: var(--input-height);
   width: 100%;
+  text-transform: uppercase;
 }
 
 .color-picker-input {
-  background-color: transparent;
-  border-radius: 8px;
+  background-color: var(--background-color);
+  border: 1.5px solid var(--text-dark);
+  border-radius: var(--border-radius-s);
   cursor: pointer;
-  height: 2.5rem;
+  height: 2.7rem;
 }

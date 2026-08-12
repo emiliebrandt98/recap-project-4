@@ -1,24 +1,26 @@
 .overall-score {
-  padding: 5px;
+  display: inline;
+  padding: 6px 10px;
+  border-radius: var(--border-radius-s);
+  margin-top: 6px;
+
+  background: var(--background-color);
 }
 
 .overall-score--Yup {
   padding: 2px 6px;
   display: inline;
   color: green;
-  background: black;
 }
 
 .overall-score--Kinda {
   display: inline;
   padding: 2px 6px;
   color: orange;
-  background: black;
 }
 
 .overall-score--Nope {
   display: inline;
   padding: 2px 6px;
   color: red;
-  background: black;
 }

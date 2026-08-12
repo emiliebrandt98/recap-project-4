@@ -1,9 +1,19 @@
 body {
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  padding: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 20px;
+  background-color: #ebf2fa;
+  color: var(--text-dark);
 }
 
 .color-list {
+  border-color: var(--primary-dark);
+  display: flex;
+  flex-direction: column;
   list-style-type: none;
-  padding: 0;
+  padding: 0px;
+  gap: 16px;
+}
+
+.headline-01 {
+  margin-bottom: 16px;
 }

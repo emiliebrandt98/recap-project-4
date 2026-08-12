@@ -1,6 +1,7 @@
 import { useId } from "react";
 import ColorInput from "../ColorInput/ColorInput";
 import "./ColorForm.css";
+import { SubmitButton } from "../Button/Button";
 
 const defaultDataValue = {
   role: "role of your color",
@@ -16,6 +17,7 @@ export default function ColorForm({
   const roleId = useId();
   const hexId = useId();
   const contrastTextID = useId();
+  const labelColor = { color: defaultData.contrastText };
 
   function handleSubmitButton(event) {
     event.preventDefault();
@@ -25,8 +27,8 @@ export default function ColorForm({
   }
 
   return (
-    <form onSubmit={handleSubmitButton} className="color-form">
-      <label htmlFor={roleId} className="form-label">
+    <form onSubmit={handleSubmitButton} className="color-add-form">
+      <label htmlFor={roleId} className="form-label" style={labelColor}>
         Role
         <input
           type="text"
@@ -37,13 +39,13 @@ export default function ColorForm({
         />
       </label>
 
-      <label htmlFor={hexId} className="form-label">
+      <label htmlFor={hexId} className="form-label" style={labelColor}>
         Hexa
         <br />
         <ColorInput id={hexId} name="hex" defaultValue={defaultData.hex} />
       </label>
 
-      <label htmlFor={contrastTextID} className="form-label">
+      <label htmlFor={contrastTextID} className="form-label" style={labelColor}>
         Contrast Text
         <br />
         <ColorInput
@@ -53,9 +55,7 @@ export default function ColorForm({
         />
       </label>
 
-      <button type="submit" className="submit-button">
-        {buttonText}
-      </button>
+      <SubmitButton buttonText={buttonText} color={defaultData} />
     </form>
   );
 }

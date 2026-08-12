@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./CopyToClipboard.css";
+import { SimpleButton } from "../Button/Button";
 
 export function CopyToClipboard({ color }) {
   const [copyConfirmation, setCopyConfirmation] = useState(false);
@@ -26,8 +27,10 @@ export function CopyToClipboard({ color }) {
   }
 
   return (
-    <button type="button" onClick={handleCopyClick}>
-      {copyConfirmation ? "Successfully copied!" : "Copy"}
-    </button>
+    <SimpleButton
+      color={color}
+      onClick={handleCopyClick}
+      buttonText={copyConfirmation ? "Successfully copied!" : "Copy Hexa"}
+    />
   );
 }

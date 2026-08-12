@@ -1,11 +1,48 @@
+/* Card */
 .color-card {
-  margin: 0px 10px;
-  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--gap-m);
+  border-radius: var(--border-radius-m);
+  gap: 18px;
+}
+
+/* Card-Headline */
+.hex-headline {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-m);
 }
 
 .color-card-headline {
   display: inline;
-  padding: 2px 6px;
-  background: black;
-  color: white;
+  padding: 6px 10px;
+  border-radius: var(--border-radius-s);
+
+  background: var(--primary-dark);
+
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+/* Card-Infos */
+.content-infos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-s);
+}
+
+/* Buttons: Edit and Delete */
+.delete-edit-button {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-m);
+  width: 100%;
+}
+
+/* Combi: Edit-form and Cancle-button */
+.edit-form {
+  display: flex;
+  flex-direction: column;
 }

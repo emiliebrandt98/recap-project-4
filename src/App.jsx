@@ -133,7 +133,7 @@ function App() {
 
   return (
     <>
-      <h1>Theme Creator</h1>
+      <h1 className="headline-01">Theme Creator</h1>
       <ThemeSelector
         themes={themes}
         onAddTheme={handleAddTheme}
