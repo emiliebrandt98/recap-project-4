@@ -1,15 +1,16 @@
+import { SimpleButton } from "../Button/Button";
 import "./DeleteConfirmation.css";
 
-export function DeleteConfirmation({ onCancel, onConfirmDelete }) {
+export function DeleteConfirmation({ onCancel, onConfirmDelete, color }) {
   return (
-    <p className="color-card-hightlight">
-      Really delete?{" "}
-      <button type="button" onClick={onCancel}>
-        Cancel
-      </button>
-      <button type="button" onClick={onConfirmDelete}>
-        Delete
-      </button>
-    </p>
+    <div className="delete-option">
+      <p className="color-card-hightlight">Really delete? </p>
+      <SimpleButton onClick={onCancel} buttonText={"No"} color={color} />
+      <SimpleButton
+        onClick={onConfirmDelete}
+        buttonText={"Yes"}
+        color={color}
+      />
+    </div>
   );
 }

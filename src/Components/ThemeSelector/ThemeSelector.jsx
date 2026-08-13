@@ -2,6 +2,7 @@ import { useId, useState, useEffect } from "react";
 import { initialThemes } from "../../lib/themes";
 import "./ThemeSelector.css";
 import { DeleteConfirmation } from "../DeleteConfirmation/DeleteConfirmation";
+import { SimpleButton } from "../Button/Button";
 
 export function ThemeSelector({
   value,
@@ -10,6 +11,7 @@ export function ThemeSelector({
   onAddTheme,
   onDeleteTheme,
   onEditTheme,
+  color,
 }) {
   const themeSelectorId = useId();
   const [themeName, setThemeName] = useState("");
@@ -38,86 +40,88 @@ export function ThemeSelector({
   }
 
   return (
-    <form onSubmit={(event) => event.preventDefault()}>
-      <label htmlFor={themeSelectorId}>
-        Theme Name:
-        <select id={themeSelectorId} onChange={onChange} value={value}>
+    <form className="theme-form" onSubmit={(event) => event.preventDefault()}>
+      <div className="choose-theme">
+        <label className="select-label" htmlFor={themeSelectorId}>
+          <strong>Choose Theme:</strong>
+        </label>
+        <select
+          className="select-form"
+          id={themeSelectorId}
+          onChange={onChange}
+          value={value}
+        >
           {themes.map((theme) => (
             <option key={theme.id} value={theme.id}>
               {theme.name}
             </option>
           ))}
         </select>
-      </label>
+      </div>
 
       {/* Theme hinzufügen */}
-      <label>
-        New Theme Name:
+      <fieldset className="themes-edit">
+        <legend>
+          <strong>Theme:</strong>
+        </legend>
         <input
+          className="input-theme"
           type="text"
           value={themeName}
           onChange={(event) => setThemeName(event.target.value)}
           placeholder="Theme Name"
         />
-      </label>
-
-      {/* Theme edit */}
-      {isEditingTheme ? (
-        <>
-          <button type="button" onClick={handleEditSubmit}>
-            Save
-          </button>
-          <button
-            type="button"
+        {/* Theme edit */}
+        {isEditingTheme ? (
+          <>
+            <SimpleButton
+              color={color}
+              buttonText="Save"
+              onClick={handleEditSubmit}
+            />
+            <SimpleButton
+              color={color}
+              buttonText="Cancel"
+              onClick={() => {
+                setIsEditingTheme(false);
+                setThemeName("");
+              }}
+            />
+          </>
+        ) : (
+          <SimpleButton onClick={handleAddSubmit} buttonText="Add Theme" />
+        )}
+        {!isEditingTheme && (
+          <SimpleButton
             onClick={() => {
-              setIsEditingTheme(false);
-              setThemeName("");
+              setThemeName(currentTheme?.name || "");
+              setIsEditingTheme(true);
             }}
-          >
-            Cancel
-          </button>
-        </>
-      ) : (
-        <button type="button" onClick={handleAddSubmit}>
-          Add Theme
-        </button>
-      )}
-
-      {!isEditingTheme && (
-        <button
-          type="button"
-          onClick={() => {
-            setThemeName(currentTheme?.name || "");
-            setIsEditingTheme(true);
-          }}
-          disabled={isDefaultTheme}
-        >
-          Edit Button
-        </button>
-      )}
-
-      {/* Theme löschen */}
-      {isConfirmingDelete ? (
-        <DeleteConfirmation
-          onConfirmDelete={() => {
-            onDeleteTheme(value);
-            setIsConfirmingDelete(false);
-          }}
-          onCancel={() => {
-            setIsConfirmingDelete(false);
-          }}
-        />
-      ) : (
-        <button
-          type="button"
-          onClick={() => {
-            setIsConfirmingDelete(true);
-          }}
-          disabled={isDefaultTheme}
-        >
-          Delete Theme
-        </button>
-      )}
+            disabled={isDefaultTheme}
+            buttonText="Edit Theme"
+          />
+        )}
+        {/* Theme löschen */}
+        {isConfirmingDelete ? (
+          <DeleteConfirmation
+            onConfirmDelete={() => {
+              onDeleteTheme(value);
+              setIsConfirmingDelete(false);
+            }}
+            onCancel={() => {
+              setIsConfirmingDelete(false);
+            }}
+          />
+        ) : (
+          <SimpleButton
+            onClick={() => {
+              setIsConfirmingDelete(true);
+            }}
+            disabled={isDefaultTheme}
+            buttonText="Delete Theme"
+          />
+        )}
+      </fieldset>
     </form>
   );
 }

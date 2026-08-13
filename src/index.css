@@ -64,3 +64,30 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+:root {
+  /* Colors */
+  --background-color: #ebf2fa;
+  --primary-dark: #05668d;
+  --primary-light: #427aa1;
+  --secondary-dark: #679436;
+  --secondary-light: #a5be00;
+  --tertrary: #ff0022;
+  --quartray: #ffa62b;
+  --text-light: #ebf2fa;
+  --text-dark: #022b3b;
+
+  /* Gaps */
+  --gap-s: 8px;
+  --gap-m: 16px;
+  --gap-l: 32px;
+
+  /* border */
+  --border: 1.5px;
+  --border-radius-m: 10px;
+  --border-radius-s: 6px;
+
+  /* input */
+  --input-height: 2.5 rem;
+  --input-padding: 8px 12px;
+}

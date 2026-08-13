@@ -1,11 +1,12 @@
 import useLocalStorageState from "use-local-storage-state";
-import { initialColors } from "./lib/colors";
 import Color from "./Components/Color/Color";
 import ColorForm from "./Components/ColorForm/ColorForm";
-import "./App.css";
+import { initialColors } from "./lib/colors";
 import { initialThemes } from "./lib/themes";
 import { ThemeSelector } from "./Components/ThemeSelector/ThemeSelector";
 import { useEffect } from "react";
+import { Divider } from "./Components/Divider/Divider";
+import "./App.css";
 
 function App() {
   // –––––––––––––––––––––– UseStates –––––––––––––––––––––––––
@@ -133,7 +134,7 @@ function App() {
 
   return (
     <>
-      <h1>Theme Creator</h1>
+      <h1 className="headline-01">Theme Creator</h1>
       <ThemeSelector
         themes={themes}
         onAddTheme={handleAddTheme}
@@ -142,7 +143,9 @@ function App() {
         value={activeThemeId || ""}
         onChange={(event) => setActiveThemeId(event.target.value)}
       />
+      <Divider />
       <ColorForm onSubmitColor={handleAddColor} buttonText="Add new Color" />
+      <Divider />
       <ul className="color-list">
         {activeColors.map((color) => (
           <li key={color.id}>
