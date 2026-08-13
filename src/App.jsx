@@ -28,18 +28,12 @@ function App() {
   );
 
   useEffect(() => {
-    // gathers all color ids that any theme already references
-    // array.prototype.flatMap() = instances returns a new array formed by applying a given
-    // callback function to each element of the array, and then flattening the result by one level
     const referencedIds = themes.flatMap((theme) => theme.colors);
 
-    // Filters out all colors from listColors whose Id doesn't appear in referencedIds and collect only their Ids
     const orphanedColorIds = listColors
       .filter((color) => !referencedIds.includes(color.id))
       .map((color) => color.id);
 
-    // setThemes is only called if there are actually orphaned colors
-    // setThemes  has the orphaned ids added to its existing color list, all other themes remain unchanged
     if (orphanedColorIds.length > 0) {
       setThemes(
         themes.map((theme) =>
@@ -50,6 +44,7 @@ function App() {
       );
     }
   }, []);
+
   // –––––––––––––––––––––– Array-Methodes –––––––––––––––––––––––––
 
   // Find the active Theme

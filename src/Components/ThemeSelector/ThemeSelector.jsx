@@ -91,16 +91,18 @@ export function ThemeSelector({
         ) : (
           <SimpleButton onClick={handleAddSubmit} buttonText="Add Theme" />
         )}
+
         {!isEditingTheme && (
           <SimpleButton
             onClick={() => {
-              setThemeName(currentTheme?.name || "");
+              setThemeName(currentTheme.name || "");
               setIsEditingTheme(true);
             }}
             disabled={isDefaultTheme}
             buttonText="Edit Theme"
           />
         )}
+
         {/* Theme löschen */}
         {isConfirmingDelete ? (
           <DeleteConfirmation
